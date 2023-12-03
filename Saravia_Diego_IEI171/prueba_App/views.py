@@ -9,8 +9,9 @@ def RenderIndex(request):
     return render(request, 'Index.html')
 
 def ListarSocios(request):
-    Socio = Socios.objects.all()
-    data = {'Socio':Socio}
+    Socio = Socios.objects.all().order_by('-Socio_Fecha_in')[:15]
+
+    data = {'Socio': Socio}
     return render(request, 'Socios.html', data)
 
 def AgregarSocio(request):

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,13 +22,18 @@
             {{ error }}
         </div>
         {% endfor %}
+        {% for error in form.Socio_Observacion.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}
         
         <table class="table">
             {{form.as_table}}
             {% csrf_token %}
             <tr>
                 <td colspan="2">
-                    <a href="/socios" class="btn btn-info float-end">Socios</a>
+                    <a href="/socios" class="btn btn-info float-end">Lista de Socios</a>
                     <input type="submit" class="btn btn-success" value="Guardar"></input>
                 </td>
             </tr>
