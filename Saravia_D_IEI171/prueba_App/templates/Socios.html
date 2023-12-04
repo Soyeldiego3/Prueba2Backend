@@ -12,10 +12,42 @@
     <div class="alert alert-info display-1 text-center"> 
         Listado de Socios
     </div>
-    <div class="d-flex justify-content-between">
-        <a href="/" class="btn btn-danger">Volver</a>
-        <a href="/agregar" class="btn btn-info">Agregar Nuevo Socio</a>
+    <div class="d-flex justify-content-between mb-2">
+        <a href="/" class="btn btn-danger"> <i class="bi bi-arrow-left"></i> Volver</a>
+        <a href="/agregar" class="btn btn-info">Agregar Nuevo Socio <i class="bi bi-person-fill-add"></i></a>
     </div>
+    <script>
+        function alerta(id){
+            Swal.fire({
+                title: "Estas Seguro de Eliminar el Socio?",
+                text: "Este Cambio no es Reversible!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si!"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                    title: "Socio Eliminado!",
+                    icon: "success"
+                    });
+                    window.location.href="/eliminar/"+ id;
+                }
+                });
+        }
+        function editarSocio(id) {
+        Swal.fire({
+            title: 'Redirigiendo a Editar...',
+            icon: 'info',
+            timer: 500,
+            showConfirmButton: false,
+            willClose: () => {
+                window.location.href = '/editar/' + id;
+            }
+        });
+        }
+    </script>
 
     {% if Socio %}
     <table class="table table-hover overflow-auto">
@@ -30,7 +62,6 @@
                 <th scope="col">Sexo</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Observación</th>
-                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -51,11 +82,9 @@
                 {% else %}
                     <td class="overflow-auto text-danger">Sin Observaciónes</td>
                 {% endif %}
-                <td>
-                    <a class="btn btn-danger btn-sm" href="/eliminar/{{per.id}}"><i class="bi bi-trash"></i></a>
-                </td>
-                <td>
-                    <a class="btn btn-success btn-sm" href="/editar/{{per.id}}"><i class="bi bi-pencil"></i></a>
+                <td class="btn-group">
+                    <a class="btn btn-danger btn-sm" onclick="return(alerta('{{per.id}}'))"><i class="bi bi-trash"></i></a>
+                    <a class="btn btn-success btn-sm" onclick="return(editarSocio('{{per.id}}'))"><i class="bi bi-pencil"></i></a>
                 </td>
 
             </tr>

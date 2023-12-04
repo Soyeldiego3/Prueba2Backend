@@ -15,7 +15,7 @@ class FormSocios(forms.ModelForm):
     Socio_Telefono = forms.IntegerField(label='Numero Telefonico', widget=forms.TextInput(attrs={'placeholder': '912345678', 'class': 'form-control', 'input_type': 'tel'}), validators=[RegexValidator(regex=r'^\d{1,9}$', message='El número de teléfono no es válido')])
     Socio_Email = forms.EmailField(label='Correo Electronico', widget=forms.EmailInput(attrs={'placeholder': 'Ingrese el correo electrónico', 'class': 'form-control'}), validators=[validate_email])
 
-    SEXO_CHOICES = [
+    SEXO_CHOICES = [ 
         ('Masculino', 'Masculino'),
         ('Femenino', 'Femenino'),
         ('Otro', 'Otro'),
